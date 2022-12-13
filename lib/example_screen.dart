@@ -34,7 +34,9 @@ class ExampleScreen extends StatelessWidget {
                 children: [
                   Icon(Icons.share, color: Colors.blue),
                   SizedBox(height: 8),
-                  Text("SHARE", style: TextStyle(color: Colors.blue))
+                  Text(
+                    "SHARE",
+                  )
                 ],
               )
             ],
