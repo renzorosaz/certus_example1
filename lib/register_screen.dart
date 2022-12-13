@@ -44,11 +44,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       underTitleRegister(),
                       SizedBox(
-                        height: 20,
+                        height: 67,
                       ),
                       ListButtonsSocialMedia(),
                       SizedBox(
-                        height: 20,
+                        height: 40,
                       ),
                       underSubTitleRegister()
                     ]),
@@ -73,6 +73,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       // MOSTRAR WIDGETS  :  COMO METODOS O COMO WIDGETS PERSONALIZADOS
                       //InputPassword()
                       changeVisibility(context),
+                      SizedBox(height: 50),
+                      Container(
+                        width: 350,
+                        height: 52,
+                        child: TextButton(
+                            style: ButtonStyle(
+                                //backgroundColor:MaterialStateProperty.resolveWith((states) => print(states);)
+                                ),
+                            onPressed: () {},
+                            child: Text("Registrar")),
+                      )
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     print("Voy a registrar a este usuario");
+                      //   },
+                      //   child: Container(
+                      //       width: 350,
+                      //       height: 52,
+                      //       decoration: BoxDecoration(
+                      //           border: Border.all(
+                      //               color: Colors.blueAccent, width: 1),
+                      //           borderRadius: BorderRadius.circular(5),
+                      //           color: Colors.blueAccent),
+                      //       child: Center(
+                      //           child: Text("Registrar",
+                      //               style: APTextStyle(context)
+                      //                   .titleInputText
+                      //                   .copyWith(
+                      //                       color: Colors.white,
+                      //                       fontSize: 17)))),
+                      // )
                     ],
                   ),
                 )
