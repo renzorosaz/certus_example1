@@ -78,23 +78,72 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       changeVisibility(context),
                       SizedBox(height: 50),
                       Button(
-                        onTap: () {
-                          print("Registrar");
-                          print("Nombre completo " + fullNameController.text);
-                          print("Email " + emailController.text);
-                          print("Clave  " + passController.text);
-
+                        onTap: () async {
                           user.fullName = fullNameController.text;
                           user.email = emailController.text;
                           user.password = passController.text;
-
-                          print("El nombre completo del usuario es " +
-                              user.fullName.toString());
+                          await showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  content: Container(
+                                    height: 120,
+                                    child: Column(children: [
+                                      Text("¿Está seguro de registrase?",
+                                          style: APTextStyle(context)
+                                              .titleHaveAcount),
+                                      SizedBox(height: 10),
+                                      Text("Tus datos de usuario: "),
+                                      SizedBox(height: 20),
+                                      Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text("Nombre Completo "),
+                                              Text(user.fullName!,
+                                                  style: APTextStyle(context)
+                                                      .titleInputText),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text("Email "),
+                                              Text(user.email!,
+                                                  style: APTextStyle(context)
+                                                      .titleInputText),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("Aceptar"),
+                                          Text("Cancelar")
+                                        ],
+                                      )
+                                    ]),
+                                  ),
+                                );
+                              });
                         },
-                      )
+                      ),
+                      SizedBox(height: 50),
                     ],
                   ),
-                )
+                ),
+                Container(
+                    padding: EdgeInsets.only(left: 100),
+                    child: Row(
+                      children: [
+                        Text("Alredy have an account?",
+                            style: APTextStyle(context).titleHaveAcount),
+                        SizedBox(width: 8),
+                        Text("Login",
+                            style: APTextStyle(context)
+                                .titleHaveAcount
+                                .copyWith(color: Colors.purple[800]))
+                      ],
+                    ))
               ],
             ),
           ),

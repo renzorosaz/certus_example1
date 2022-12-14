@@ -1,0 +1,17 @@
+//--CASOS COMUNES DONDE SE UTILIZA---
+//OBTENER DATOS A TRAVEZ DE UNA red
+
+//ESCRIBIR EN UNA BASE DE DATOS
+//LEER DATOS DE UN ARCHIVO
+
+Future<String> functionData() async {
+  //PROCEDIMIENTOS PARA TRAER INFORMACION DE UN SERVIDOR X
+  // MEDIANTE HTTP - NOS COMUNICAMOS CON SERVIDORES
+  //VAMOS A REALIZAR PETICIONES
+
+  return "";
+}
+
+Future<void> mostrarResultado() async {
+  String resultado = await functionData();
+}
