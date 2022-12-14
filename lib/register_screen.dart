@@ -1,8 +1,10 @@
 import 'package:example1_flutter/utils/fonts.dart';
-import 'package:example1_flutter/widgets/input/input_password.dart';
 import 'package:example1_flutter/widgets/list/list_buttons_social_media.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'model/user.dart';
+import 'widgets/buttons/button.dart';
 
 class RegisterScreen extends StatefulWidget {
   RegisterScreen({
@@ -19,6 +21,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final passController = TextEditingController();
 
   bool _isObscure = true;
+  User user = User("", "", "");
 
   @override
   Widget build(BuildContext context) {
@@ -74,36 +77,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       //InputPassword()
                       changeVisibility(context),
                       SizedBox(height: 50),
-                      Container(
-                        width: 350,
-                        height: 52,
-                        child: TextButton(
-                            style: ButtonStyle(
-                                //backgroundColor:MaterialStateProperty.resolveWith((states) => print(states);)
-                                ),
-                            onPressed: () {},
-                            child: Text("Registrar")),
+                      Button(
+                        onTap: () {
+                          print("Registrar");
+                          print("Nombre completo " + fullNameController.text);
+                          print("Email " + emailController.text);
+                          print("Clave  " + passController.text);
+
+                          user.fullName = fullNameController.text;
+                          user.email = emailController.text;
+                          user.password = passController.text;
+
+                          print("El nombre completo del usuario es " +
+                              user.fullName.toString());
+                        },
                       )
-                      // GestureDetector(
-                      //   onTap: () {
-                      //     print("Voy a registrar a este usuario");
-                      //   },
-                      //   child: Container(
-                      //       width: 350,
-                      //       height: 52,
-                      //       decoration: BoxDecoration(
-                      //           border: Border.all(
-                      //               color: Colors.blueAccent, width: 1),
-                      //           borderRadius: BorderRadius.circular(5),
-                      //           color: Colors.blueAccent),
-                      //       child: Center(
-                      //           child: Text("Registrar",
-                      //               style: APTextStyle(context)
-                      //                   .titleInputText
-                      //                   .copyWith(
-                      //                       color: Colors.white,
-                      //                       fontSize: 17)))),
-                      // )
                     ],
                   ),
                 )
@@ -137,16 +125,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         _isObscure = !_isObscure;
                       });
                     },
-                    icon: Icon(_isObscure
-                        ? Icons.visibility
-                        : Icons.visibility_off_rounded)),
+                    icon: Icon(
+                      _isObscure
+                          ? Icons.visibility
+                          : Icons.visibility_off_rounded,
+                      color: Colors.purple[800],
+                    )),
                 hintText: "Ingrese su password",
                 hintStyle: APTextStyle(context)
                     .titleInputText
                     .copyWith(color: Colors.grey.shade500),
                 border: InputBorder.none,
                 focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blueAccent)),
+                    borderSide: BorderSide(color: Colors.purple[800]!)),
                 enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey.shade100)))));
   }
@@ -173,7 +164,7 @@ Widget inputEmail(BuildContext context, TextEditingController emailController) {
                       .copyWith(color: Colors.grey.shade500),
                   border: InputBorder.none,
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent)),
+                      borderSide: BorderSide(color: Colors.purple[800]!)),
                   enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey.shade100))))),
     ],
@@ -205,7 +196,7 @@ Widget inputTextFullName(
                       .copyWith(color: Colors.grey.shade500),
                   border: InputBorder.none,
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent)),
+                      borderSide: BorderSide(color: Colors.purple[800]!)),
                   enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey.shade100))))),
     ],
