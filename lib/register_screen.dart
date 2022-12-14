@@ -1,8 +1,11 @@
 import 'package:example1_flutter/utils/fonts.dart';
+import 'package:example1_flutter/widgets/buttons/button_alert.dart';
+import 'package:example1_flutter/widgets/buttons/button_alert_only_border.dart';
 import 'package:example1_flutter/widgets/list/list_buttons_social_media.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'home_page.dart';
 import 'model/user.dart';
 import 'widgets/buttons/button.dart';
 
@@ -84,10 +87,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           user.password = passController.text;
                           await showDialog(
                               context: context,
+                              barrierDismissible: false,
                               builder: (context) {
                                 return AlertDialog(
                                   content: Container(
-                                    height: 120,
+                                    height: 180,
                                     child: Column(children: [
                                       Text("¿Está seguro de registrase?",
                                           style: APTextStyle(context)
@@ -115,10 +119,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           ),
                                         ],
                                       ),
+                                      SizedBox(height: 20),
                                       Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text("Aceptar"),
-                                          Text("Cancelar")
+                                          ButtonAlert(
+                                            onTap: () {
+                                              //WIDGET QUE PERMITE NAVEGAR  HACIA OTRA PANTALL
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          HomePage()));
+                                            },
+                                            texto: "Aceptar",
+                                          ),
+                                          ButtonAlertOnlyBorder(
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                            texto: "Cancelar",
+                                          ),
                                         ],
                                       )
                                     ]),
@@ -268,3 +290,16 @@ Widget underTitleRegister() {
       style: GoogleFonts.nunito(
           fontSize: 15, color: Colors.grey, fontWeight: FontWeight.w500));
 }
+
+//TAREA : CONSTRUIR UNA PANTALLA DE LOGIN DE USUARIO( INICIAR SESIÓN)
+
+// RECOMENDACIONES: 
+
+//CREAR VARIABLES
+//CREAR CONTROLADORES
+//UTILIZAR TEXTFORMFIELDS
+
+
+//CREAR BOTON " INICIAR SESION"
+  // MOSTRAR UNA ALERTA -  CON LAS VARIABLES UTILIZADAS
+  //NAVEGAR A UNA PAGINA NUEVA HOMEPAGE 
