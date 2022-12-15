@@ -23,78 +23,72 @@ class _HomePageState extends State<HomePage> {
   }
 
   //FUNCION PARA VALIDAR, REVISAR O VERIFICAR LAS PREFERENCIAS DE USUARIO
-  void checkPreferencesUser() async {
+  Future<void> checkPreferencesUser() async {
     final prefs = await SharedPreferences.getInstance();
     fullname = prefs.getString('fullname');
     print(fullname);
   }
 
-  Future<void> getProductos() async {}
-
-  Future<void> listarClientes() async {}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          leading: Icon(Icons.drag_handle_rounded),
-          actions: [
-            GestureDetector(
-              onTap: () async {
-                await showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Center(
-                            child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(fullname!,
-                                style: APTextStyle(context)
-                                    .titleReferenceName
-                                    .copyWith(color: Colors.blue)),
-                            Text("¿Desea cerrar sesión?"),
-                          ],
-                        )),
-                        actions: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              ButtonAlert(
-                                color: Colors.blueAccent,
-                                onTap: () {
-                                  //Navigator.pushAndRemoveUntil :  Permite navegar a un nuevo Screen y remover las anteriores
-                                  Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute<void>(
-                                          builder: (BuildContext context) =>
-                                              RegisterScreen()),
-                                      (route) => false);
-                                },
-                                text: "Aceptar",
-                              ),
-                              ButtonAlertOnlyBorder(
-                                color: Colors.blueAccent,
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                text: "Cancelar",
-                              )
-                            ],
+      appBar: AppBar(actions: [
+        GestureDetector(
+          onTap: () async {
+            await showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Center(
+                        child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(fullname!,
+                            style: APTextStyle(context)
+                                .titleReferenceName
+                                .copyWith(color: Colors.blue)),
+                        Text("¿Desea cerrar sesión?"),
+                      ],
+                    )),
+                    actions: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ButtonAlert(
+                            color: Colors.blueAccent,
+                            onTap: () async {
+                              //Navigator.pushAndRemoveUntil :  Permite navegar a un nuevo Screen y remover las anteriores
+
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute<void>(
+                                      builder: (BuildContext context) =>
+                                          RegisterScreen()),
+                                  (route) => false);
+                            },
+                            text: "Aceptar",
+                          ),
+                          ButtonAlertOnlyBorder(
+                            color: Colors.blueAccent,
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            text: "Cancelar",
                           )
                         ],
-                      );
-                    });
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(right: 12),
-                child: Icon(Icons.exit_to_app),
-              ),
-            )
-          ],
-          automaticallyImplyLeading: false,
-          title: Text("Pantalla Principal")),
+                      )
+                    ],
+                  );
+                });
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(right: 12),
+            child: Icon(Icons.exit_to_app),
+          ),
+        )
+      ], title: Text("Pantalla Principal")),
+      drawer: Drawer(),
     );
   }
 }
