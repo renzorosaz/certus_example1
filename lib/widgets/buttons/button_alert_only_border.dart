@@ -4,11 +4,12 @@ import '../../utils/fonts.dart';
 
 class ButtonAlertOnlyBorder extends StatelessWidget {
   void Function()? onTap;
-  String texto;
-
+  String text;
+  Color color;
   ButtonAlertOnlyBorder({
-    required this.texto,
+    required this.text,
     required this.onTap,
+    required this.color,
     Key? key,
   }) : super(key: key);
 
@@ -20,14 +21,14 @@ class ButtonAlertOnlyBorder extends StatelessWidget {
           width: 100,
           height: 50,
           decoration: BoxDecoration(
-              border: Border.all(color: Colors.purple[800]!),
+              border: Border.all(color: color),
               borderRadius: BorderRadius.circular(5),
               color: Colors.white),
           child: Center(
-              child: Text(texto,
+              child: Text(text,
                   style: APTextStyle(context)
                       .titleInputText
-                      .copyWith(color: Colors.purple[800])))),
+                      .copyWith(color: color)))),
     );
   }
 }

@@ -4,11 +4,13 @@ import '../../utils/fonts.dart';
 
 class ButtonAlert extends StatelessWidget {
   void Function()? onTap;
-  String texto;
+  Color color;
+  String text;
 
   ButtonAlert({
-    required this.texto,
+    required this.text,
     required this.onTap,
+    required this.color,
     Key? key,
   }) : super(key: key);
 
@@ -20,10 +22,9 @@ class ButtonAlert extends StatelessWidget {
           width: 100,
           height: 50,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.purple[800]!.withOpacity(0.8)),
+              borderRadius: BorderRadius.circular(5), color: color),
           child: Center(
-              child: Text(texto,
+              child: Text(text,
                   style: APTextStyle(context)
                       .titleInputText
                       .copyWith(color: Colors.white)))),

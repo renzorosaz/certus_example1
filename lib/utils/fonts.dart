@@ -11,6 +11,11 @@ class APTextStyle {
         fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold);
   }
 
+  TextStyle get titleReferenceName {
+    return GoogleFonts.nunito(
+        fontSize: 19, color: Colors.black, fontWeight: FontWeight.bold);
+  }
+
   TextStyle get titleHaveAcount {
     return GoogleFonts.nunito(
         fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold);

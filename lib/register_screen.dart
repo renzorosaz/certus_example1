@@ -4,6 +4,7 @@ import 'package:example1_flutter/widgets/buttons/button_alert_only_border.dart';
 import 'package:example1_flutter/widgets/list/list_buttons_social_media.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'home_page.dart';
 import 'model/user.dart';
@@ -25,6 +26,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   bool _isObscure = true;
   User user = User("", "", "");
+  //SharedPreferences shared  =SharedPreferences();
+
+  Future<void> guardarReferenciaUsuario(String fullname) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('fullname', fullname);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +92,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           user.fullName = fullNameController.text;
                           user.email = emailController.text;
                           user.password = passController.text;
+
+                          if (user.fullName != "" &&
+                              user.email != "" &&
+                              user.password != "") {
+                            guardarReferenciaUsuario(user.fullName!);
+                          }
+
                           await showDialog(
                               context: context,
                               barrierDismissible: false,
@@ -93,7 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   content: Container(
                                     height: 180,
                                     child: Column(children: [
-                                      Text("¿Está seguro de registrase?",
+                                      Text("¿Está seguro de registrarse?",
                                           style: APTextStyle(context)
                                               .titleHaveAcount),
                                       SizedBox(height: 10),
@@ -126,20 +140,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         children: [
                                           ButtonAlert(
                                             onTap: () {
-                                              //WIDGET QUE PERMITE NAVEGAR  HACIA OTRA PANTALL
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          HomePage()));
+                                              //Navigator.pop : Permite deshacer ShowDialog
+                                              Navigator.pop(
+                                                  context); // DESHACER EL SHOWDIALOG
+
+                                              // Navigator.push : Permite sobrepener un Widget
+                                              // Navigator.push(
+                                              //     context,
+                                              //     MaterialPageRoute(
+                                              //         builder: (context) =>
+                                              //             HomePage()));
+
+                                              /// Navigator.pushReplacement : Permite  sobreponer un Widget y al mismo tiempo deshacer los anteriores
+                                              ///
+                                              Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute<void>(
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          const HomePage(),
+                                                ),
+                                              );
                                             },
-                                            texto: "Aceptar",
+                                            text: "Aceptar",
+                                            color: Colors.purple[800]!
+                                                .withOpacity(0.8),
                                           ),
                                           ButtonAlertOnlyBorder(
+                                            color: Colors.purple[800]!,
                                             onTap: () {
                                               Navigator.pop(context);
                                             },
-                                            texto: "Cancelar",
+                                            text: "Cancelar",
                                           ),
                                         ],
                                       )
@@ -293,13 +325,12 @@ Widget underTitleRegister() {
 
 //TAREA : CONSTRUIR UNA PANTALLA DE LOGIN DE USUARIO( INICIAR SESIÓN)
 
-// RECOMENDACIONES: 
+// RECOMENDACIONES:
 
 //CREAR VARIABLES
 //CREAR CONTROLADORES
 //UTILIZAR TEXTFORMFIELDS
 
-
 //CREAR BOTON " INICIAR SESION"
-  // MOSTRAR UNA ALERTA -  CON LAS VARIABLES UTILIZADAS
-  //NAVEGAR A UNA PAGINA NUEVA HOMEPAGE 
+// MOSTRAR UNA ALERTA -  CON LAS VARIABLES UTILIZADAS
+//NAVEGAR A UNA PAGINA NUEVA HOMEPAGE
